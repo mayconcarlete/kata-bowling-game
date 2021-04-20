@@ -1,9 +1,22 @@
+import { Frame } from "./models/frame"
+
 export class Bowling{
-    frame:number[] = []
-    constructor(frame:number[]){
-        this.frame = frame
+    frameControl:number = 0
+    
+    constructor( 
+        private frame: Frame[]
+        ){
+            this.frameControl = this.frame.length
+        }
+    public get getFrame():Frame[]{
+        return this.frame
     }
-    roll(knocked_pins: number){}
+    public get getFrameControl():number{
+        return this.frame.length
+    }
+    roll(knocked_pins: number):void{
+
+    }
     score(): number{
         return 1
     }
