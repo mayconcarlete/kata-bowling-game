@@ -15,6 +15,6 @@ export class Frame {
     }
 
     score():number{
-        return 0
+        return (this.firstPlay || 0) + (this.secondPlay || 0 )
     }
 }
