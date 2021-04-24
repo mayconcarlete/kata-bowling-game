@@ -11,9 +11,9 @@ export class Frame {
     }
 
     roll(knocked_pins:number):void{
-        this.firstPlay == undefined ? this.firstPlay = knocked_pins:this.secondPlay
+        this.firstPlay == undefined ? this.firstPlay = knocked_pins: this.secondPlay = knocked_pins
     }
-    
+
     score():number{
         return 0
     }
