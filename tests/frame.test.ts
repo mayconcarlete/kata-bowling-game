@@ -12,6 +12,13 @@ describe('Frame class', () => {
         expect(sut.getFirstPlay).toBe(5)
         expect(sut.getSecondPlay).toBeFalsy()
     })
+    test('Should set secondPlay when roll are called for the second time', () => {
+        const sut = new Frame()
+        sut.roll(0)
+        sut.roll(9)
+        expect(sut.getFirstPlay).toBe(0)
+        expect(sut.getSecondPlay).toBe(9)
+    })
     test('Should return 0 when frame doenst has filled with plays', () => {
         const sut = new Frame()
         const result = sut.score()
