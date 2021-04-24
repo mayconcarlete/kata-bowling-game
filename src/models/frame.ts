@@ -1,6 +1,7 @@
 export class Frame {
-    constructor(
-        private first_play:number,
-        private second_play:number
-    ){}
+    private firstPlay: undefined | number
+    private secondPlay: undefined | number
+    score():number{
+        return 0
+    }
 }
