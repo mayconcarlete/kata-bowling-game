@@ -10,6 +10,10 @@ export class Frame {
         return this.secondPlay
     }
 
+    roll(knocked_pins:number):void{
+        this.firstPlay == undefined ? this.firstPlay = knocked_pins:this.secondPlay
+    }
+    
     score():number{
         return 0
     }
