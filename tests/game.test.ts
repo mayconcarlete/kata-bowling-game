@@ -15,4 +15,10 @@ describe('Game class', () => {
         sut.roll(2)
         expect(rollSpy).toHaveBeenCalledWith(2)
     })
+    test('Should set firstPlay of frame when game call roll', () => {
+        const sut = new Game()
+        sut.roll(3)
+        expect(sut.frame[0].getFirstPlay).toBe(3)
+        expect(sut.frame[0].getSecondPlay).toBeFalsy()
+    })
 })
