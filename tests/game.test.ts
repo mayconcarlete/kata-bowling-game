@@ -21,4 +21,10 @@ describe('Game class', () => {
         expect(sut.frame[0].getFirstPlay).toBe(3)
         expect(sut.frame[0].getSecondPlay).toBeFalsy()
     })
+    test('Should calculate score when roll finish', () => {
+        const sut = new Game()
+        const scoreSpy = jest.spyOn(sut, 'score')
+        sut.roll(2)
+        expect(scoreSpy).toHaveBeenCalledTimes(1)
+    })
 })
