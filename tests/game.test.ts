@@ -55,5 +55,12 @@ describe('Game class', () => {
         const score = sut.score()
         expect(score).toBe(3)
     })
-   
+    test('Should calculate score of all frames', () => {
+        const sut = new Game()
+        sut.roll(1)
+        sut.roll(1)
+        sut.roll(1)
+        const score = sut.score()
+        expect(score).toBe(3)
+    })
 })  
