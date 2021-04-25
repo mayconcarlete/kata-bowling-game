@@ -27,4 +27,8 @@ describe('Game class', () => {
         sut.roll(2)
         expect(scoreSpy).toHaveBeenCalledTimes(1)
     })
-})
+    test('Should start roundControl with 0 value', () => {
+        const sut = new Game()
+        expect(sut.roundControl).toBe(0)
+    })
+})  
