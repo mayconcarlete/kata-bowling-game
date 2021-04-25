@@ -10,6 +10,14 @@ export class Frame {
         return this.secondPlay
     }
 
+    set setFirstPlay(knocked_pins:number){
+        this.firstPlay = knocked_pins
+    }
+
+    set setSecondPlay(knocked_pins:number){
+        this.secondPlay = knocked_pins
+    }
+
     roll(knocked_pins:number):void{
         this.firstPlay == undefined ? this.firstPlay = knocked_pins: this.secondPlay = knocked_pins
     }
