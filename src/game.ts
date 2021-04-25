@@ -23,6 +23,10 @@ export class Game {
         }
     }
     score():number{
-        return this.frame[0].score()
+        let score = 0
+        this.frame.forEach( frame =>{
+            score += frame.score()
+        })
+        return score
     }
 }
