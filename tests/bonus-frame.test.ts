@@ -22,4 +22,13 @@ describe('Bonus Frame class', () => {
         expect(sut.getSecondPlay).toBe(5)
         expect(sut.getThirdPlay).toBeFalsy()
     })
+    test('Should set thirdPlay when roll is called three times', () => {
+        const sut = new BonusFrame()
+        sut.roll(0)
+        sut.roll(2)
+        sut.roll(3)
+        expect(sut.getFirstPlay).toBe(0)
+        expect(sut.getSecondPlay).toBe(2)
+        expect(sut.getThirdPlay).toBe(3)
+    })
 })
