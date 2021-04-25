@@ -63,8 +63,15 @@ describe('Game class', () => {
         const score = sut.score()
         expect(score).toBe(3)
     })
-    test('Should Game update frameControl and roundControl when a strike or spare are done', () => {
+    test('Should Game update frameControl and roundControl when a strike', () => {
         const sut = new Game()
+        sut.roll(10)
+        expect(sut.roundControl).toBe(0)
+        expect(sut.frameControl).toBe(1)
+    })
+    test('Should Game update frameControl and roundControl when a spare', () =>{
+        const sut = new Game()
+        sut.roll(0)
         sut.roll(10)
         expect(sut.roundControl).toBe(0)
         expect(sut.frameControl).toBe(1)
