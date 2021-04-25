@@ -36,26 +36,26 @@ describe('Game class', () => {
         sut.roll(4)
         expect(sut.roundControl).toBe(0)
     })
-    test('Should increment frameControl when roll is called twice', () => {
+    test('Should Game increment frameControl when roll is called twice', () => {
         const sut = new Game()
         sut.roll(1)
         sut.roll(5)
         expect(sut.frameControl).toBe(1)
     })
-    test('Should call score when roll finish', () => {
+    test('Should Game call score when roll finish', () => {
         const sut = new Game()
         const scoreSpy = jest.spyOn(sut, 'score')
         sut.roll(2)
         expect(scoreSpy).toHaveBeenCalledTimes(1)
     })
-    test('Should calculate score of first frame when roll is called twice', () => {
+    test('Should Game score calculate score of first frame when roll is called twice', () => {
         const sut = new Game()
         sut.roll(1)
         sut.roll(2)
         const score = sut.score()
         expect(score).toBe(3)
     })
-    test('Should calculate score of all frames', () => {
+    test('Should Game score calculate score of all frames', () => {
         const sut = new Game()
         sut.roll(1)
         sut.roll(1)
