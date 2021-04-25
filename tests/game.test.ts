@@ -31,4 +31,9 @@ describe('Game class', () => {
         const sut = new Game()
         expect(sut.roundControl).toBe(0)
     })
+    test('Should increment roundControl when roll is called', () =>{
+        const sut = new Game()
+        sut.roll(1)
+        expect(sut.roundControl).toBe(1)
+    })
 })  
