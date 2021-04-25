@@ -42,4 +42,10 @@ describe('Game class', () => {
         sut.roll(4)
         expect(sut.roundControl).toBe(0)
     })
+    test('Should increment frameControl when roll is called twice', () => {
+        const sut = new Game()
+        sut.roll(1)
+        sut.roll(5)
+        expect(sut.frameControl).toBe(1)
+    })
 })  
