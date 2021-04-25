@@ -14,8 +14,13 @@ export class Game {
     roll(knocked_pins:number ):void {
         this.frame[this.frameControl].roll(knocked_pins)
         this.score()
-        this.roundControl >= 1 ? this.roundControl = 0 : this.roundControl += 1
-        this.frameControl += 1
+        if(this.roundControl >= 1){
+            this.roundControl = 0
+            this.frameControl += 1
+        }
+        else{
+            this.roundControl += 1
+        }
     }
     score(){
     }
