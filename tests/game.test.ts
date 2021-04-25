@@ -21,12 +21,6 @@ describe('Game class', () => {
         expect(sut.frame[0].getFirstPlay).toBe(3)
         expect(sut.frame[0].getSecondPlay).toBeFalsy()
     })
-    test('Should calculate score when roll finish', () => {
-        const sut = new Game()
-        const scoreSpy = jest.spyOn(sut, 'score')
-        sut.roll(2)
-        expect(scoreSpy).toHaveBeenCalledTimes(1)
-    })
     test('Should start roundControl with 0 value', () => {
         const sut = new Game()
         expect(sut.roundControl).toBe(0)
@@ -48,4 +42,18 @@ describe('Game class', () => {
         sut.roll(5)
         expect(sut.frameControl).toBe(1)
     })
+    test('Should call score when roll finish', () => {
+        const sut = new Game()
+        const scoreSpy = jest.spyOn(sut, 'score')
+        sut.roll(2)
+        expect(scoreSpy).toHaveBeenCalledTimes(1)
+    })
+    test('Should calculate score of first frame when roll is called twice', () => {
+        const sut = new Game()
+        sut.roll(1)
+        sut.roll(2)
+        const score = sut.score()
+        expect(score).toBe(3)
+    })
+   
 })  
