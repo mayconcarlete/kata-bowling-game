@@ -27,7 +27,8 @@ describe('Frame class', () => {
     test('Should return the sum of firstPlay and secondPlay', () => {
         const sut = new Frame()
         sut.roll(1)
-        const result = sut.score()
-        expect(result).toBe(1)
+        expect(sut.score()).toBe(1)
+        sut.roll(2)
+        expect(sut.score()).toBe(3)
     })
 })
