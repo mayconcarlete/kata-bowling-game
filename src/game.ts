@@ -22,6 +22,7 @@ export class Game {
             this.roundControl += 1
         }
     }
-    score(){
+    score():number{
+        return this.frame[0].score()
     }
 }
