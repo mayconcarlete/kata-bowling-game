@@ -12,5 +12,9 @@ export class Game {
     }
     roll(knocked_pins:number ):void {
         this.frame[this.frameControl].roll(knocked_pins)
+        this.score()
+    }
+    score(){
+        console.log('Score')
     }
 }
