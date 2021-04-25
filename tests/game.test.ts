@@ -36,4 +36,10 @@ describe('Game class', () => {
         sut.roll(1)
         expect(sut.roundControl).toBe(1)
     })
+    test('Should reset roundControl to 0 value when roll is called two times', () => {
+        const sut = new Game()
+        sut.roll(1)
+        sut.roll(4)
+        expect(sut.roundControl).toBe(0)
+    })
 })  
