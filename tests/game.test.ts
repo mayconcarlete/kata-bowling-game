@@ -83,4 +83,13 @@ describe('Game class', () => {
         sut.roll(5)
         expect(sut.score()).toBe(22)
     })
+    test('Should calculate bonus when spare', () => {
+        const sut = new Game()
+        sut.roll(3)
+        sut.roll(7)
+        sut.roll(1)
+        const score = sut.score()
+        expect(score).toBe(12)
+    })
+
 })  
