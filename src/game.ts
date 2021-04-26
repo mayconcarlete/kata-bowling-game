@@ -41,7 +41,7 @@ export class Game {
                 }
             }
             if(this.frame[i].isSpare() === true){
-                score += this.frame[i+1].getFirstPlay || 0
+                score += (this.frame[i+1].getFirstPlay || 0)
             }
             score += this.frame[i].score()
         }
