@@ -11,6 +11,7 @@ export class Game {
         }
         this.frame[9] = new BonusFrame()
     }
+
     roll(knocked_pins:number ):void {
         this.frame[this.frameControl].roll(knocked_pins)
         this.score()
@@ -18,7 +19,7 @@ export class Game {
             this.frameControl += 1
             this.roundControl = 0
         }
-        else if(this.roundControl >= 1){
+        else if(this.roundControl === 1){
             this.roundControl = 0
             this.frameControl += 1
         }
@@ -27,11 +28,20 @@ export class Game {
         }
         
     }
+
     score():number{
         let score = 0
-        this.frame.forEach( frame =>{
-            score += frame.score()
+        this.frame.forEach((frame, index) => {
+            if(frame.isStrike() && this.frame[index+1]!== undefined){
+                score += this.isStrike(index)
+            }
         })
         return score
+    }
+    isStrike(index:number):number{
+        if(this.frame[index+2].getSecondPlay !== undefined){
+            return this.frame[index+1].getFirstPlay + this.frame[i+2].getSecondPlay
+        }
+        return 0
     }
 }

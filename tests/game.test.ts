@@ -71,9 +71,16 @@ describe('Game class', () => {
     })
     test('Should Game update frameControl and roundControl when a spare', () =>{
         const sut = new Game()
-        sut.roll(0)
-        sut.roll(10)
+        sut.roll(5)
+        sut.roll(5)
         expect(sut.roundControl).toBe(0)
         expect(sut.frameControl).toBe(1)
+    })
+    test('Should calculate bonus when strike', () =>{
+        const sut = new Game()
+        sut.roll(10)
+        sut.roll(1)
+        sut.roll(5)
+        expect(sut.score()).toBe(22)
     })
 })  

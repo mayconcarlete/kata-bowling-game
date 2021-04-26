@@ -31,4 +31,27 @@ describe('Frame class', () => {
         sut.roll(2)
         expect(sut.score()).toBe(3)
     })
+    test('Should return true when frame is strike', () => {
+        const sut = new Frame()
+        sut.roll(10)
+        expect(sut.isStrike()).toBeTruthy()
+        expect(sut.getSecondPlay).toBeFalsy()
+    })
+    test('Should return false when frame is not a strike', () => {
+        const sut = new Frame()
+        sut.roll(3)
+        expect(sut.isStrike()).toBeFalsy()
+    })
+    test('Should return true when frame is a spare and not strike', () => {
+        const sut = new Frame()
+        sut.roll(5)
+        sut.roll(5)
+        expect(sut.isSpare()).toBeTruthy()
+    })
+    test('Should return false when frame is not a spare', () => {
+        const sut = new Frame()
+        sut.roll(3)
+        sut.roll(3)
+        expect(sut.isSpare()).toBeFalsy()
+    })
 })

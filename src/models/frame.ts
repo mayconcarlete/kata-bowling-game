@@ -18,11 +18,20 @@ export class Frame {
         this.secondPlay = knocked_pins
     }
 
+    
     roll(knocked_pins:number):void{
         this.firstPlay == undefined ? this.firstPlay = knocked_pins: this.secondPlay = knocked_pins
     }
-
+    
     score():number{
         return (this.firstPlay || 0) + (this.secondPlay || 0 )
+    }
+    
+    isStrike():boolean{
+        return this.firstPlay == 10 ? true : false
+    }
+    
+    isSpare():boolean{
+        return this.score() == 10 && this.isStrike() === false ? true : false
     }
 }
