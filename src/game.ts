@@ -31,17 +31,23 @@ export class Game {
 
     score():number{
         let score = 0
-        this.frame.forEach((frame, index) => {
-            if(frame.isStrike() && this.frame[index+1]!== undefined){
-                score += this.isStrike(index)
+        for(let i = 0; i <= this.frameControl; i ++){
+            if(this.frame[i].isStrike() === true){
+                if(this.frame[i+1].isStrike() === true && this.frame[i+1].isStrike() === true){
+                    score += 10 + (this.frame[i+2].getFirstPlay || 0)
+                }
+                else{
+                    score += this.frame[i+1].score()
+                }
             }
-        })
+            score += this.frame[i].score()
+        }
         return score
     }
     isStrike(index:number):number{
         if(this.frame[index+2].getSecondPlay !== undefined){
-            return this.frame[index+1].getFirstPlay + this.frame[i+2].getSecondPlay
+            return this.frame[index+1].getFirstPlay || 0 + (this.frame[index+2].getSecondPlay || 0)
         }
-        return 0
+        return this.frame[index].score()
     }
 }
