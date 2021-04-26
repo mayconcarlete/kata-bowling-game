@@ -40,14 +40,11 @@ export class Game {
                     score += this.frame[i+1].score()
                 }
             }
+            if(this.frame[i].isSpare() === true){
+                score += this.frame[i+1].getFirstPlay || 0
+            }
             score += this.frame[i].score()
         }
         return score
-    }
-    isStrike(index:number):number{
-        if(this.frame[index+2].getSecondPlay !== undefined){
-            return this.frame[index+1].getFirstPlay || 0 + (this.frame[index+2].getSecondPlay || 0)
-        }
-        return this.frame[index].score()
     }
 }
