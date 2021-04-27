@@ -31,7 +31,7 @@ export class Game {
 
     score():number{
         let score = 0
-        for(let i = 0; i <= this.frameControl; i ++){
+        for(let i = 0; i < 9; i ++){
             if(this.frame[i].isStrike() === true){
                 if(this.frame[i+1].isStrike() === true && this.frame[i+1].isStrike() === true){
                     score += 10 + (this.frame[i+2].getFirstPlay || 0)
