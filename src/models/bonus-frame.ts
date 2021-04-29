@@ -16,4 +16,7 @@ export class BonusFrame extends Frame {
            this.thirdPlay = knocked_pins
        }
     }
+    bonusStrike():number{
+        return this.score() + (this.getThirdPlay || 0)
+    }
 }

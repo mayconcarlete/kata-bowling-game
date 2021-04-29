@@ -31,7 +31,7 @@ export class Game {
 
     score():number{
         let score = 0
-        for(let i = 0; i <= 9; i ++){
+        for(let i = 0; i < 8; i ++){
             if(this.frame[i].isStrike() === true){
                 if(this.frame[i+1].isStrike() === true && this.frame[i+1].isStrike() === true){
                     score += 10 + (this.frame[i+2].getFirstPlay || 0)
@@ -45,7 +45,16 @@ export class Game {
             }
             score += this.frame[i].score()
         }
-        //score+= this.frame[9].score()
+        if(this.frame[8].isStrike()){
+            score += this.frame[8].score() + this.frame[9].score()
+        }
+        else if(this.frame[8].isSpare()){
+            score += this.frame[8].score() + (this.frame[9].getFirstPlay || 0)
+        }
+        if(this.frame[9].isStrike()){
+            
+        }
+        score+= this.frame[9].score()
         return score
     }
 }
