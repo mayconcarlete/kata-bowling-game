@@ -93,5 +93,13 @@ describe('Game class', () => {
         const score = sut.score()
         expect(score).toBe(27)
     })
-
+    test('Should calculate bonus when frame 9 is strike', () => {
+        const sut = new Game()
+        for(let i =0; i< 16;i++) sut.roll(1)
+        sut.roll(10)
+        sut.roll(3)
+        sut.roll(4)
+        const score = sut.score()
+        expect(score).toBe(40)
+    })
 })  
