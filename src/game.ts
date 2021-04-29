@@ -45,6 +45,7 @@ export class Game {
             }
             score += this.frame[i].score()
         }
+        score+= this.frame[9].score()
         return score
     }
 }
