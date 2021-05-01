@@ -56,7 +56,7 @@ export class Game {
         else if(this.frame[8].isSpare()){
             score += this.frame[8].score() + (this.frame[9].getFirstPlay || 0)
         }
-        if(this.frame[9].isStrike()){
+        if(this.frame[9].isStrike() || this.frame[9].isSpare()){
             score += this.frame[9].getThirdPlay
         }
         score+= this.frame[9].score()

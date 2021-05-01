@@ -113,8 +113,17 @@ describe('Game class', () => {
     })
     test('Should calculate bonus when Bonus Frame strike', () => {
         const sut = new Game()
-        for(let i =0; i< 21; i++) sut.roll(10)
+        for(let i =0; i< 12; i++) sut.roll(10)
         const score = sut.score()
         expect(score).toBe(300)
+    })
+    test('Should calculate bonus when Frame spare', () => {
+        const sut = new Game()
+        for(let i =0; i< 9; i++) sut.roll(10)
+        sut.roll(5)
+        sut.roll(5)
+        sut.roll(5)
+        const score = sut.score()        
+        expect(score).toBe(270)
     })
 })  

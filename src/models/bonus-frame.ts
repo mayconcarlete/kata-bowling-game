@@ -4,7 +4,7 @@ export class BonusFrame extends Frame {
 
     private thirdPlay: undefined | number
     get getThirdPlay():undefined | number{
-        return this.thirdPlay
+        return this.thirdPlay || 0
     }
     
     roll(knocked_pins:number):void{
