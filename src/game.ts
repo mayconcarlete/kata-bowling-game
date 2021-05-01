@@ -4,7 +4,7 @@ import { Frame } from "./models/frame";
 export class Game {
     frameControl:number = 0 
     roundControl:number = 0
-    frame: Frame[]|BonusFrame[] = []
+    frame:any = []
     constructor(){
         for(let i=0; i<9; i++ ){
             this.frame[i] = new Frame()
@@ -13,6 +13,7 @@ export class Game {
     }
 
     roll(knocked_pins:number ):void {
+        if(this.frameControl < 9){
         this.frame[this.frameControl].roll(knocked_pins)
         this.score()
         if(knocked_pins == 10){
@@ -26,7 +27,11 @@ export class Game {
         else{
             this.roundControl += 1
         }
-        
+    }
+    else{
+        this.frame[9].roll(knocked_pins)
+        this.score()
+    }
     }
 
     score():number{
@@ -52,7 +57,7 @@ export class Game {
             score += this.frame[8].score() + (this.frame[9].getFirstPlay || 0)
         }
         if(this.frame[9].isStrike()){
-            
+            score += this.frame[9].getThirdPlay
         }
         score+= this.frame[9].score()
         return score

@@ -115,7 +115,6 @@ describe('Game class', () => {
         const sut = new Game()
         for(let i =0; i< 21; i++) sut.roll(10)
         const score = sut.score()
-        console.log(sut.frame)
         expect(score).toBe(300)
     })
 })  
