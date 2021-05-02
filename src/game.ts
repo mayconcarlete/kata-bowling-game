@@ -36,6 +36,24 @@ export class Game {
 
     score():number{
         let score = 0
+        score = this.calculateFrameLessThanEight()
+        if(this.frame[8].isStrike()){
+            score += this.frame[8].score() + this.frame[9].score()
+        }
+        else if(this.frame[8].isSpare()){
+            score += this.frame[8].score() + (this.frame[9].getFirstPlay || 0)
+        }
+        else{
+            score += this.frame[8].score()
+        }
+        if(this.frame[9].isStrike() || this.frame[9].isSpare()){
+            score += this.frame[9].getThirdPlay
+        }
+        score+= this.frame[9].score()
+        return score
+    }
+    calculateFrameLessThanEight():number{
+        let score = 0
         for(let i = 0; i < 8; i ++){
             if(this.frame[i].isStrike() === true){
                 if(this.frame[i+1].isStrike() === true && this.frame[i+1].isStrike() === true){
@@ -50,16 +68,6 @@ export class Game {
             }
             score += this.frame[i].score()
         }
-        if(this.frame[8].isStrike()){
-            score += this.frame[8].score() + this.frame[9].score()
-        }
-        else if(this.frame[8].isSpare()){
-            score += this.frame[8].score() + (this.frame[9].getFirstPlay || 0)
-        }
-        if(this.frame[9].isStrike() || this.frame[9].isSpare()){
-            score += this.frame[9].getThirdPlay
-        }
-        score+= this.frame[9].score()
         return score
     }
 }
