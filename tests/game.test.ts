@@ -133,7 +133,6 @@ describe('Game class', () => {
         sut.roll(3)
         sut.roll(5)
         const score = sut.score()        
-        console.log(sut.frame)
         expect(score).toBe(236)
     })
 })  
