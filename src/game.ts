@@ -38,33 +38,51 @@ export class Game {
         let score = 0
         score += this.calculateFrameLessThanEight()
         score += this.calculateFrameEight()
-        score+= this.calculateLastFrame()
+        score+= this.calculateBonusFrame()
         return score
     }
+
     calculateFrameLessThanEight():number{
         let score = 0
         for(let i = 0; i < 8; i ++){
-            if(this.frame[i].isStrike() === true){
-                if(this.frame[i+1].isStrike() === true && this.frame[i+1].isStrike() === true){
-                    score += 10 + (this.frame[i+2].getFirstPlay || 0)
-                }
-                else{
-                    score += this.frame[i+1].score()
-                }
+            if(this.isStrike(i)){
+                score += this.calculateLessThanEightStrikeBonus(i)
             }
-            if(this.frame[i].isSpare() === true){
-                score += (this.frame[i+1].getFirstPlay || 0)
+            else if(this.isSpare(i)){
+                score += this.calculateLessThanWithSpareBonus(i)
             }
             score += this.frame[i].score()
         }
         return score
     }
+    
+    isStrike(index:number):boolean{
+        return this.frame[index].isStrike()
+    }
+    
+    calculateLessThanEightStrikeBonus(index: number):number{
+        if(this.frame[index+1].isStrike() && this.frame[index+1].isStrike()){
+            return 10 + (this.frame[index+2].getFirstPlay || 0)
+        }
+        else{
+            return this.frame[index+1].score()
+        }
+    }
+    
+    isSpare(index: number):boolean{
+        return this.frame[index].isSpare()
+    }
+    
+    calculateLessThanWithSpareBonus(index:number):number{
+        return (this.frame[index+1].getFirstPlay || 0)
+    }
+    
     calculateFrameEight():number{
         let score = 0
-        if(this.frame[8].isStrike()){
+        if(this.isStrike(8)){
             score += this.frame[8].score() + this.frame[9].score()
         }
-        else if(this.frame[8].isSpare()){
+        else if(this.isSpare(8)){
             score += this.frame[8].score() + (this.frame[9].getFirstPlay || 0)
         }
         else{
@@ -72,9 +90,10 @@ export class Game {
         }
         return score
     }
-    calculateLastFrame():number{
+    
+    calculateBonusFrame():number{
         let score = 0
-        if(this.frame[9].isStrike() || this.frame[9].isSpare()){
+        if(this.isStrike(9) || this.isSpare(9)){
             score += this.frame[9].getThirdPlay
         }
         score+= this.frame[9].score()
