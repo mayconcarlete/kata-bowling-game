@@ -61,7 +61,7 @@ export class Game {
     }
     
     calculateLessThanEightStrikeBonus(index: number):number{
-        if(this.frame[index+1].isStrike() && this.frame[index+1].isStrike()){
+        if(this.isStrike(index+1)){
             return 10 + (this.frame[index+2].getFirstPlay || 0)
         }
         else{
