@@ -27,11 +27,11 @@ export class Game {
         else{
             this.roundControl += 1
         }
-    }
-    else{
-        this.frame[9].roll(knocked_pins)
-        this.score()
-    }
+        }
+        else{
+            this.frame[9].roll(knocked_pins)
+            this.score()
+        }
     }
 
     score():number{
