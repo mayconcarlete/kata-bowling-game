@@ -2,16 +2,37 @@ import { BonusFrame } from "./models/bonus-frame";
 import { Frame } from "./models/frame";
 
 export class Game {
-    frameControl:number = 0 
-    roundControl:number = 0
-    frame:any = []
+    frame:(Frame | BonusFrame)[] = []
     constructor(){
         for(let i=0; i<9; i++ ){
             this.frame[i] = new Frame()
         }
         this.frame[9] = new BonusFrame()
     }
-
+    roll(knocked_pins: number):void {
+        const index = this.getFramePosition()
+        this.frame[index].roll(knocked_pins)
+        this.score()
+    }
+    score():number{
+        const score = this.frame.reduce((score, currentFrame, index) => { 
+            return score + currentFrame.score(this.frame, index)
+        }, 0)
+        return score
+    }
+    getFramePosition(){
+        for(let index = 0; index < 10; index ++){
+            if(this.frame[index].isStrike()) return index + 1
+            if(!this.frame[index].getFirstPlay){
+                return index
+            }
+            else if(this.frame[index].getFirstPlay && !this.frame[index].getSecondPlay) {
+                return index
+            }
+        }
+        return 0
+    }
+/*
     roll(knocked_pins:number ):void {
         if(this.frameControl < 9){
         this.frame[this.frameControl].roll(knocked_pins)
@@ -99,4 +120,5 @@ export class Game {
         score+= this.frame[9].score()
         return score
     }
+    */
 }
