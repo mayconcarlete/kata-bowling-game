@@ -63,46 +63,46 @@ describe('Game class', () => {
         sut.roll(1)    
         sut.roll(9)
         sut.roll(5)
-        
         const score = sut.score()
         expect(score).toBe(27)
     })
-    test('Should calculate bonus when frame 9 is strike', () => {
+    test('Should calculate bonus when Frame spare', () => {
         const sut = new Game()
-        for(let i =0; i< 16;i++) sut.roll(1)
-        sut.roll(10)
-        sut.roll(3)
-        sut.roll(4)
-        const score = sut.score()
-        expect(score).toBe(40)
-    })
-    test('Should calculate bonus when frame 9 spare', () => {
-        const sut = new Game()
-        for(let i =0; i< 16;i++) sut.roll(1)
         sut.roll(5)
         sut.roll(5)
-        sut.roll(4)
-        const score = sut.score()
-        expect(score).toBe(34)
-    })
-    test('Should calculate bonus when Bonus Frame strike', () => {
-        const sut = new Game()
-        for(let i =0; i< 22; i++) {
-            sut.roll(10)
-        }
-        const score = sut.score()
+        sut.roll(5)
+        const score = sut.score()        
         console.log(sut.frame)
-        expect(score).toBe(300)
+        expect(score).toBe(20)
     })
-    // test('Should calculate bonus when Frame spare', () => {
+    // test('Should calculate bonus when frame 9 is strike', () => {
     //     const sut = new Game()
-    //     for(let i =0; i< 9; i++) sut.roll(10)
-    //     sut.roll(5)
-    //     sut.roll(5)
-    //     sut.roll(5)
-    //     const score = sut.score()        
-    //     expect(score).toBe(270)
+    //     for(let i =0; i< 16;i++) sut.roll(1)
+    //     sut.roll(10)
+    //     sut.roll(3)
+    //     sut.roll(4)
+    //     const score = sut.score()
+    //     expect(score).toBe(40)
     // })
+    // test('Should calculate bonus when frame 9 spare', () => {
+    //     const sut = new Game()
+    //     for(let i =0; i< 16;i++) sut.roll(1)
+    //     sut.roll(5)
+    //     sut.roll(5)
+    //     sut.roll(4)
+    //     const score = sut.score()
+    //     expect(score).toBe(34)
+    // })
+    // test('Should calculate bonus when Bonus Frame strike', () => {
+    //     const sut = new Game()
+    //     for(let i =0; i< 22; i++) {
+    //         sut.roll(10)
+    //     }
+    //     const score = sut.score()
+    //     console.log(sut.frame)
+    //     expect(score).toBe(300)
+    // })
+  
     // test('Should calculate bonus when Frame spare', () => {
     //     const sut = new Game()
     //     for(let i =0; i< 8; i++) sut.roll(10)
