@@ -34,13 +34,10 @@ export class Game {
     }
     getFramePosition(){
         for(let index = 0; index < 10; index ++){
-            if(this.frame[index].isStrike() && this.frame[index +1].getFirstPlay === undefined) return index + 1
-            else if(this.frame[index].getFirstPlay === undefined){
-                return index
-            }
-            else if(this.frame[index].getFirstPlay !== undefined && this.frame[index].getSecondPlay === undefined) {
-                return index
-            }
+            if(this.frame[index].getFirstPlay === undefined) return index
+            else if(!this.frame[index].isStrike() && this.frame[index].getFirstPlay !== undefined && this.frame[index].getSecondPlay === undefined) return index 
+            else if(this.frame[index].isStrike()) return (index + 1)
+            
         }
         return 0
     }

@@ -1,5 +1,6 @@
-export class Frame {
 
+export class Frame {
+    
     private firstPlay: undefined | number
     private secondPlay: undefined | number
     
@@ -18,21 +19,17 @@ export class Frame {
     set setSecondPlay(knocked_pins:number){
         this.secondPlay = knocked_pins
     }
-
     
     roll(knocked_pins:number):void{
         this.firstPlay === undefined ? this.firstPlay = knocked_pins: this.secondPlay = knocked_pins
     }
-    
     score():number{
         return (this.firstPlay || 0) + (this.secondPlay || 0 )
     }
-    
     isStrike():boolean{
-        return this.firstPlay === 10 ? true : false
+        return this.getFirstPlay === 10 ? true : false
     }
-    
     isSpare():boolean{
-        return (this.getFirstPlay || 0 ) + (this.getSecondPlay || 0) === 10 && !this.isStrike()
+        return (this.getFirstPlay || 0) + (this.getSecondPlay || 0) === 10 ? true : false
     }
 }
