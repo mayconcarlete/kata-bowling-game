@@ -2,7 +2,7 @@ import { BonusFrame } from "./models/bonus-frame";
 import { Frame } from "./models/frame";
 
 export class Game {
-    frame:(Frame | BonusFrame)[] = []
+    frame:any[] = []
     constructor(){
         for(let i=0; i<9; i++ ){
             this.frame[i] = new Frame()
@@ -34,7 +34,7 @@ export class Game {
     }
     getFramePosition(){
         for(let index = 0; index < 10; index ++){
-            if(this.frame[index].isStrike()) return index + 1
+            if(this.frame[index].isStrike() && this.frame[index +1].getFirstPlay === undefined) return index + 1
             else if(this.frame[index].getFirstPlay === undefined){
                 return index
             }
