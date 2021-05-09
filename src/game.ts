@@ -17,33 +17,13 @@ export class Game {
         const score = this.frame.reduce((score, currentFrame, index) => { 
             let bonus = 0
             if(index < 8){
-                if(currentFrame.isStrike()){
-                    if(this.frame[index + 1].isStrike() && this.frame[index + 2].isStrike()){
-                        bonus += 20
-                    }
-                    else if(!this.frame[index+1].isStrike()){
-                        bonus += this.frame[index+1].score()
-                    }
-                }
-                else if(currentFrame.isSpare()){
-                    bonus += (this.frame[index +1].getFirstPlay || 0)
-                }
-           }
+                bonus = this.scoreLessThanEight(index)
+            }
             else if(index === 8){
-                if(currentFrame.isStrike()){
-                    bonus += (this.frame[index + 1].getFirstPlay || 0) + (this.frame[index + 1].getSecondPlay || 0)
-                } 
-                else if(currentFrame.isSpare()){
-                    bonus += (this.frame[index +1].getFirstPlay || 0)
-                }
+               bonus = this.scoreFrameEight(index)
             }
             else if(index === 9){
-                if(currentFrame.isStrike()){
-                    bonus += (this.frame[index].getThirdPlay || 0)
-                }
-                else if(currentFrame.isSpare()){
-                    bonus += (this.frame[index].getSecondPlay || 0)
-                }
+               bonus = this.scoreBonusFrame(index)
             }
             return score + currentFrame.score() + bonus
         }, 0)
@@ -77,5 +57,43 @@ export class Game {
     }
     isThirdPlayEmpty(index: number):boolean{
         return this.frame[index].getThirdPlay === undefined
+    }
+    scoreLessThanEight(index:number):number{
+        let bonus = 0
+        if(this.isStrike(index)){
+            if(this.isStrike(index +1) && this.isStrike(index+2)){
+                bonus += 20
+            }
+            else if(!this.isStrike(index+1)){
+                bonus += this.frame[index+1].score()
+            }
+        }
+        else if(this.isSpare(index)){
+            bonus += (this.frame[index +1].getFirstPlay || 0)
+        }
+        return bonus
+    }
+    isSpare(index:number):boolean{
+        return this.frame[index].isSpare()
+    }
+    scoreFrameEight(index:number):number{
+        let bonus = 0
+        if(this.isStrike(index)){
+            bonus += (this.frame[index + 1].getFirstPlay || 0) + (this.frame[index + 1].getSecondPlay || 0)
+        } 
+        else if(this.isSpare(index)){
+            bonus += (this.frame[index +1].getFirstPlay || 0)
+        }
+        return bonus
+    }
+    scoreBonusFrame(index:number):number{
+        let bonus = 0
+        if(this.isStrike(index)){
+            bonus += (this.frame[index].getThirdPlay || 0)
+        }
+        else if(this.isSpare(index)){
+            bonus += (this.frame[index].getSecondPlay || 0)
+        }
+        return bonus
     }
 }

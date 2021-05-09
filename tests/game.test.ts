@@ -96,7 +96,6 @@ describe('Game class', () => {
         sut.roll(6)
         sut.roll(1)
         const score = sut.score()
-        console.log(sut.frame)
         expect(score).toBe(28)
     })
     test('Should calculate bonus when frame 10 spare', () => {
@@ -105,7 +104,6 @@ describe('Game class', () => {
         sut.roll(4)
         sut.roll(6)
         const score = sut.score()
-        console.log(sut.frame)
         expect(score).toBe(34)
     })
     test('Should calculate bonus when Bonus Frame strike', () => {
