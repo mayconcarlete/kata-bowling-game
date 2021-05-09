@@ -1,4 +1,3 @@
-import { BonusFrame } from "./models/bonus-frame";
 import { Frame } from "./models/frame";
 
 export class Game {
