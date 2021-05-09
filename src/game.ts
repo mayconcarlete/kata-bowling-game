@@ -4,10 +4,10 @@ import { Frame } from "./models/frame";
 export class Game {
     frame:any[] = []
     constructor(){
-        for(let i=0; i<9; i++ ){
+        for(let i=0; i< 10; i++ ){
             this.frame[i] = new Frame()
         }
-        this.frame[9] = new BonusFrame()
+        // this.frame[9] = new BonusFrame()
     }
     roll(knocked_pins: number):void {
         const index = this.getFramePosition()
@@ -17,16 +17,34 @@ export class Game {
     score():number{
         const score = this.frame.reduce((score, currentFrame, index) => { 
             let bonus = 0
-            if(currentFrame.isStrike()){
-                if(this.frame[index + 1].isStrike() && this.frame[index + 2].isStrike()){
-                    bonus += 20
+            if(index < 8){
+                if(currentFrame.isStrike()){
+                    if(this.frame[index + 1].isStrike() && this.frame[index + 2].isStrike()){
+                        bonus += 20
+                    }
+                    else if(!this.frame[index+1].isStrike()){
+                        bonus += this.frame[index+1].score()
+                    }
                 }
-                else if(!this.frame[index+1].isStrike()){
-                    bonus += this.frame[index+1].score()
+                else if(currentFrame.isSpare()){
+                    bonus += (this.frame[index +1].getFirstPlay || 0)
+                }
+           }
+            else if(index === 8){
+                if(currentFrame.isStrike()){
+                    bonus += (this.frame[index + 1].getFirstPlay || 0) + (this.frame[index + 1].getSecondPlay || 0)
+                } 
+                else if(currentFrame.isSpare()){
+                    bonus += (this.frame[index +1].getFirstPlay || 0)
                 }
             }
-            else if(currentFrame.isSpare()){
-                bonus += (this.frame[index +1].getFirstPlay || 0)
+            else if(index === 9){
+                if(currentFrame.isStrike()){
+                    bonus += (this.frame[index].getThirdPlay || 0)
+                }
+                else if(currentFrame.isSpare()){
+                    bonus += (this.frame[index].getSecondPlay || 0)
+                }
             }
             return score + currentFrame.score() + bonus
         }, 0)
@@ -34,6 +52,11 @@ export class Game {
     }
     getFramePosition(){
         for(let index = 0; index < 10; index ++){
+            if(index === 9){
+                if(this.frame[9].isStrike()){
+                    if(this.frame[9].getSecondPlay === undefined || this.frame[9].getThirdPlay === undefined) return 9
+                }
+            }
             if(!this.frame[index].isStrike()){
                 if(this.frame[index].getFirstPlay === undefined) return index
                 if(this.frame[index].getFirstPlay !== undefined && this.frame[index].getSecondPlay === undefined) return index
