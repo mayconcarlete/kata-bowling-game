@@ -72,8 +72,18 @@ describe('Game class', () => {
         sut.roll(5)
         sut.roll(5)
         const score = sut.score()        
-        console.log(sut.frame)
         expect(score).toBe(20)
+    })
+     test('Should calculate bonus when Frame spare', () => {
+        const sut = new Game()
+        // for(let i =0; i< 8; i++) sut.roll(10)
+        sut.roll(10)
+        sut.roll(10)
+        sut.roll(10)
+        sut.roll(10)
+        const score = sut.score()  
+        console.log(sut.frame)      
+        expect(score).toBe(236)
     })
     // test('Should calculate bonus when frame 9 is strike', () => {
     //     const sut = new Game()
@@ -103,13 +113,5 @@ describe('Game class', () => {
     //     expect(score).toBe(300)
     // })
   
-    // test('Should calculate bonus when Frame spare', () => {
-    //     const sut = new Game()
-    //     for(let i =0; i< 8; i++) sut.roll(10)
-    //     sut.roll(5)
-    //     sut.roll(3)
-    //     sut.roll(5)
-    //     const score = sut.score()        
-    //     expect(score).toBe(236)
-    // })
+   
 })  
