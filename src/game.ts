@@ -34,14 +34,21 @@ export class Game {
     }
     getFramePosition(){
         for(let index = 0; index < 10; index ++){
-            if(this.frame[index].getFirstPlay === undefined) return index
-            else if(!this.frame[index].isStrike() && this.frame[index].getFirstPlay !== undefined && this.frame[index].getSecondPlay === undefined) return index 
-            else if(this.frame[index].isStrike()) return (index + 1)
-            
+            if(!this.frame[index].isStrike()){
+                if(this.frame[index].getFirstPlay === undefined) return index
+                if(this.frame[index].getFirstPlay !== undefined && this.frame[index].getSecondPlay === undefined) return index
+            }
         }
-        return 0
+    return 0
     }
+    
 /*
+
+if(this.frame[index].isStrike()) return (index + 1)
+            if(this.frame[index].getFirstPlay === undefined) return index
+            if(this.frame[index].getFirstPlay !== undefined && this.frame[index].getSecondPlay === undefined) return index 
+            if(this.frame[index].getFirstPlay !== undefined && this.frame[index].getSecondPlay !== undefined) return (index + 1)
+
     roll(knocked_pins:number ):void {
         if(this.frameControl < 9){
         this.frame[this.frameControl].roll(knocked_pins)
