@@ -51,112 +51,31 @@ export class Game {
     }
     getFramePosition(){
         for(let index = 0; index < 10; index ++){
-            if(index === 9){
-                if(this.frame[9].isStrike()){
-                    if(this.frame[9].getSecondPlay === undefined || this.frame[9].getThirdPlay === undefined) return 9
+            if(this.isLastFrame(index)){
+                if(this.isStrike(index)){
+                    if(this.isSecondPlayEmpty(index) || this.isThirdPlayEmpty(index)) return 9
                 }
             }
-            if(!this.frame[index].isStrike()){
-                if(this.frame[index].getFirstPlay === undefined) return index
-                if(this.frame[index].getFirstPlay !== undefined && this.frame[index].getSecondPlay === undefined) return index
+            if(!this.isStrike(index)){
+                if(this.isFirstPlayEmpty(index)) return index
+                if(!this.isFirstPlayEmpty(index) && this.isSecondPlayEmpty(index)) return index
             }
         }
     return 0
     }
-    
-/*
-
-if(this.frame[index].isStrike()) return (index + 1)
-            if(this.frame[index].getFirstPlay === undefined) return index
-            if(this.frame[index].getFirstPlay !== undefined && this.frame[index].getSecondPlay === undefined) return index 
-            if(this.frame[index].getFirstPlay !== undefined && this.frame[index].getSecondPlay !== undefined) return (index + 1)
-
-    roll(knocked_pins:number ):void {
-        if(this.frameControl < 9){
-        this.frame[this.frameControl].roll(knocked_pins)
-        this.score()
-        if(knocked_pins == 10){
-            this.frameControl += 1
-            this.roundControl = 0
-        }
-        else if(this.roundControl === 1){
-            this.roundControl = 0
-            this.frameControl += 1
-        }
-        else{
-            this.roundControl += 1
-        }
-        }
-        else{
-            this.frame[9].roll(knocked_pins)
-            this.score()
-        }
+    isLastFrame(index:number):boolean{
+        return index === 9 ? true : false
     }
-
-    score():number{
-        let score = 0
-        score += this.calculateFrameLessThanEight()
-        score += this.calculateFrameEight()
-        score+= this.calculateBonusFrame()
-        return score
-    }
-
-    calculateFrameLessThanEight():number{
-        let score = 0
-        for(let i = 0; i < 8; i ++){
-            if(this.isStrike(i)){
-                score += this.calculateLessThanEightStrikeBonus(i)
-            }
-            else if(this.isSpare(i)){
-                score += this.calculateLessThanWithSpareBonus(i)
-            }
-            score += this.frame[i].score()
-        }
-        return score
-    }
-    
-    isStrike(index:number):boolean{
+    isStrike(index:number): boolean{
         return this.frame[index].isStrike()
     }
-    
-    calculateLessThanEightStrikeBonus(index: number):number{
-        if(this.isStrike(index+1)){
-            return 10 + (this.frame[index+2].getFirstPlay || 0)
-        }
-        else{
-            return this.frame[index+1].score()
-        }
+    isFirstPlayEmpty(index: number):boolean{
+        return this.frame[index].getFirstPlay === undefined
     }
-    
-    isSpare(index: number):boolean{
-        return this.frame[index].isSpare()
+    isSecondPlayEmpty(index:number):boolean{
+        return this.frame[index].getSecondPlay === undefined
     }
-    
-    calculateLessThanWithSpareBonus(index:number):number{
-        return (this.frame[index+1].getFirstPlay || 0)
+    isThirdPlayEmpty(index: number):boolean{
+        return this.frame[index].getThirdPlay === undefined
     }
-    
-    calculateFrameEight():number{
-        let score = 0
-        if(this.isStrike(8)){
-            score += this.frame[8].score() + this.frame[9].score()
-        }
-        else if(this.isSpare(8)){
-            score += this.frame[8].score() + (this.frame[9].getFirstPlay || 0)
-        }
-        else{
-            score += this.frame[8].score()
-        }
-        return score
-    }
-    
-    calculateBonusFrame():number{
-        let score = 0
-        if(this.isStrike(9) || this.isSpare(9)){
-            score += this.frame[9].getThirdPlay
-        }
-        score+= this.frame[9].score()
-        return score
-    }
-    */
 }
